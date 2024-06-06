@@ -185,7 +185,9 @@ const searchRestaurante = async (req: Request, res: Response) => {
 //Funcion para obtener los datos de un restaurante
 const getRestauranteById = async (req: Request, res: Response) => {
     try{
-        const restaurantId =new mongoose.Types.ObjectId(req.params.restaurantId);
+        //OJOOOOO acontinuación transformación de Objeto a String
+        const restaurantId =new mongoose.Types.ObjectId(req.params.restaurantId); //Agregado manualmente 
+        //const restaurantId = req.params.restaurantId; //Linea original, sustituir por la de arriba
         const restaurante = await Restaurante.findById(restaurantId);
         if(!restaurante) {
             return res.status(404)

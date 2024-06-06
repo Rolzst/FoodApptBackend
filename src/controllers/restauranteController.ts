@@ -182,9 +182,26 @@ const searchRestaurante = async (req: Request, res: Response) => {
     }
 }//Fin de searchRestaurante
 
+//Funcion para obtener los datos de un restaurante
+const getRestauranteById = async (req: Request, res: Response) => {
+    try{
+        const restaurantId =new mongoose.Types.ObjectId(req.params.restaurantId);
+        const restaurante = await Restaurante.findById(restaurantId);
+        if(!restaurante) {
+            return res.status(404)
+                      .json({ message: "Restaurante no encontrado"})
+        }
+        res.json(restaurante);
+    }catch(error){
+        console.log(error);
+        res.status(500).json({message: 'Error al obtener el restaurante'})
+    }
+}//Fin getRestaurante
+
 export default {
     getRestaurante,
     createRestaurante,
     updateRestaurante,
-    searchRestaurante
+    searchRestaurante,
+    getRestauranteById,
 }

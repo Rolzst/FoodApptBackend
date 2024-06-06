@@ -50,4 +50,14 @@ router.get("/search/:city",
     restauranteController.searchRestaurante
 
 );
+
+//Ruta para buscar un restaurante
+router.get("/:restaurantId",
+    param("restaurantId").isString()
+                          .trim()
+                          .notEmpty()
+                          .withMessage("El parametro restauranteId debe ser un string válido"),
+    restauranteController.getRestauranteById
+
+);
 export default router;
